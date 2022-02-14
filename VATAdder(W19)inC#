@@ -1,0 +1,48 @@
+using static System.Console;
+
+ string uinput = "";
+double intput = 0;
+
+WriteLine("What is the cost of the item of clothing?");
+try
+{
+    intput = Convert.ToInt32(ReadLine());
+}
+catch (Exception ex)
+{
+    WriteLine(ex);
+}
+
+WriteLine("Is the person a child or an adult? (Press A for adult and C for child)");
+
+try
+{
+    uinput = ReadLine();
+}
+catch (Exception ex)
+{
+    WriteLine(ex.Message);
+}
+
+if (uinput == "C")
+{
+    FileStream stream = new FileStream("Prices.txt", FileMode.CreateNew);
+    using StreamWriter writer = new StreamWriter(stream);
+    writer.WriteLine();
+    writer.Write(uinput);
+    writer.Write(intput);
+    writer.Close();
+}
+else if (uinput == "A")
+{
+    intput *= 1.175;
+    FileStream stream = new FileStream("Prices.txt", FileMode.CreateNew);
+    using StreamWriter writer = new StreamWriter(stream);
+    writer.WriteLine();
+    writer.Write(uinput);
+    writer.Write(intput);
+    writer.Close();
+}
+else {
+    WriteLine("You did not input a valid type");
+}
